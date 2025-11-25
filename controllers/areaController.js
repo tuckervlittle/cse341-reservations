@@ -13,7 +13,7 @@ exports.findAll = async (req, res) => {
 // create new area
 exports.create = async (req, res) => {
   try {
-    const { name, description, rules_pdf_url } = req.body;
+    const { name, description, price } = req.body;
 
     // basic validation
     if (!name) {
@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
     const newArea = await Area.create({
       name,
       description,
-      rules_pdf_url: rules_pdf_url || null
+      price
     });
 
     return res.status(201).json(newArea);
