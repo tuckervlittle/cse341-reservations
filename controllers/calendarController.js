@@ -1,25 +1,25 @@
-//const Calendar = require('../models/calendar');
+const Calendar = require('../models/calendar');
 const db = require('../models');
-const Calendar = db.calendar;
+// const Calendar = db.calendar;
 
 // findAll will work once the database is connected:
 
 // get full calendar
-// exports.findAll = async (req, res) => {
-//   try {
-//     const entries = await Calendar.find();
-//     return res.status(200).json(entries);
-//   } catch (err) {
-//     return res.status(500).json({ message: "Server error getting calendar", error: err.message });
-//   }
-// };
+exports.findAll = async (req, res) => {
+  try {
+    const entries = await Calendar.find();
+    return res.status(200).json(entries);
+  } catch (err) {
+    return res.status(500).json({ message: "Server error getting calendar", error: err.message });
+  }
+};
 
 // I put this just to test, since we are not connected to any database for now:
-exports.findAll = async (req, res) => {
-  return res.status(200).json([
-    { date: "2025-01-01", areaId: "1", is_available: true, notes: "" }
-  ]);
-};
+// exports.findAll = async (req, res) => {
+//   return res.status(200).json([
+//     { date: "2025-01-01", areaId: "1", is_available: true, notes: "" }
+//   ]);
+// };
 
 
 // create a calendar entry
