@@ -26,18 +26,18 @@ app.use('/', require('./routes'));
 
 // Database
 const db = require('./models');
-// db.mongoose.set('strictQuery', true);
-db.mongoose.set('strictQuery', false);
+db.mongoose.set('strictQuery', true);
+// db.mongoose.set('strictQuery', false);
 
-// db.mongoose
-//   .connect(db.url)
-//   .then(() => {
-//     console.log('Connected to the database!');
-//   })
-//   .catch((err) => {
-//     console.log('Cannot connect to the database!', err);
-//     process.exit();
-//  });
+db.mongoose
+  .connect(db.url)
+  .then(() => {
+    console.log('Connected to the database!');
+  })
+  .catch((err) => {
+    console.log('Cannot connect to the database!', err);
+    process.exit();
+ });
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
