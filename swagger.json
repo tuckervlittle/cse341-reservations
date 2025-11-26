@@ -12,25 +12,12 @@
     "https"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "tags": [
-          "Default"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/reservation/{userId}": {
       "post": {
         "tags": [
           "Reservations"
         ],
-        "description": "",
+        "description": "Create a reservation for a specific user",
         "parameters": [
           {
             "name": "userId",
@@ -70,7 +57,7 @@
         "tags": [
           "Reservations"
         ],
-        "description": "",
+        "description": "Get reservations of a specific user",
         "parameters": [
           {
             "name": "userId",
@@ -95,7 +82,7 @@
         "tags": [
           "Reservations"
         ],
-        "description": "",
+        "description": "Delete all reservations of a specific user",
         "parameters": [
           {
             "name": "userId",
@@ -122,7 +109,7 @@
         "tags": [
           "Reservations"
         ],
-        "description": "",
+        "description": "Update reservation status",
         "parameters": [
           {
             "name": "body",
@@ -156,10 +143,11 @@
         }
       },
       "get": {
+        
         "tags": [
           "Reservations"
         ],
-        "description": "",
+        "description": "Get all reservations",
         "responses": {
           "200": {
             "description": "OK"
@@ -175,7 +163,7 @@
         "tags": [
           "Reservations"
         ],
-        "description": "",
+        "description": "Get reservations by status",
         "responses": {
           "200": {
             "description": "OK"
@@ -188,7 +176,7 @@
         "tags": [
           "Areas"
         ],
-        "description": "",
+        "description": "Get all areas",
         "responses": {
           "200": {
             "description": "OK"
@@ -202,7 +190,7 @@
         "tags": [
           "Areas"
         ],
-        "description": "",
+        "description": "Create an area",
         "parameters": [
           {
             "name": "body",
@@ -241,7 +229,7 @@
         "tags": [
           "Areas"
         ],
-        "description": "",
+        "description": "Get an area by ID",
         "parameters": [
           {
             "name": "areaId",
@@ -266,7 +254,7 @@
         "tags": [
           "Areas"
         ],
-        "description": "",
+        "description": "Delete an area by ID",
         "parameters": [
           {
             "name": "areaId",
@@ -293,10 +281,13 @@
         "tags": [
           "Calendar"
         ],
-        "description": "",
+        "description": "Get all dates in the calendar",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -304,7 +295,7 @@
         "tags": [
           "Calendar"
         ],
-        "description": "",
+        "description": "Create a date in a calendar",
         "parameters": [
           {
             "name": "body",
@@ -343,7 +334,7 @@
         "tags": [
           "Calendar"
         ],
-        "description": "",
+        "description": "Get a specific date in the calendar",
         "parameters": [
           {
             "name": "date",
@@ -368,7 +359,7 @@
         "tags": [
           "Calendar"
         ],
-        "description": "",
+        "description": "Delete a date in the calendar",
         "parameters": [
           {
             "name": "date",
@@ -395,7 +386,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Get all users",
         "parameters": [
           {
             "name": "body",
@@ -434,7 +425,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Get a user by username",
         "parameters": [
           {
             "name": "username",
@@ -459,7 +450,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Update a user by username",
         "parameters": [
           {
             "name": "username",
@@ -484,7 +475,7 @@
         "tags": [
           "Users"
         ],
-        "description": "",
+        "description": "Delete a user by username",
         "parameters": [
           {
             "name": "username",
