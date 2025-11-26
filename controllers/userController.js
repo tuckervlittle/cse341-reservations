@@ -1,4 +1,5 @@
-const User = require('../models/user');
+const db = require('../models/index.js');
+const User = db.users;
 
 // create a new user
 exports.create = async (req, res) => {

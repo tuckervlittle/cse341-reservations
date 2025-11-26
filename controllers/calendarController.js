@@ -1,5 +1,5 @@
-const Calendar = require('../models/calendar');
-const db = require('../models');
+const db = require('../models/index.js');
+const Calendar = db.calendar;
 // const Calendar = db.calendar;
 
 // findAll will work once the database is connected:

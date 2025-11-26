@@ -1,4 +1,5 @@
-const Reservation = require('../models/reservation');
+const db = require('../models/index.js');
+const Reservation = db.reservations;
 
 // create reservation
 exports.create = async (req, res) => {
