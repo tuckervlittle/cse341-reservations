@@ -386,7 +386,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Get all users",
+        "description": "Create a user",
         "parameters": [
           {
             "name": "body",
