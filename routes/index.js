@@ -7,7 +7,7 @@ routes.use('/calendar', require('./calendar'));
 routes.use('/user', require('./user'));
 
 //  swagger route
-// routes.use('/', require('./swagger'));
+routes.use('/', require('./swagger'));
 
 // Home Route 
 routes.get('/', (req, res) => {

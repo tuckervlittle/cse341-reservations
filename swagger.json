@@ -77,15 +77,17 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/reservation/{reservationId}": {
       "delete": {
         "tags": [
           "Reservations"
         ],
-        "description": "Delete all reservations of a specific user",
+        "description": "Delete a reservation by ID",
         "parameters": [
           {
-            "name": "userId",
+            "name": "reservationId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -102,24 +104,23 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/reservation/": {
-      "put": {
-        "tags": [
-          "Reservations"
-        ],
+      },
+      "put":{
+        "tags" : ["Reservations"],
         "description": "Update reservation status",
         "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "reservationId": {
-                  "example": "any"
-                },
                 "status": {
                   "example": "any"
                 }
@@ -141,7 +142,9 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/reservation/": {
       "get": {
         
         "tags": [
@@ -163,7 +166,7 @@
         "tags": [
           "Reservations"
         ],
-        "description": "Get reservations by status",
+        "description": "Get reservation status info",
         "responses": {
           "200": {
             "description": "OK"
@@ -334,7 +337,7 @@
         "tags": [
           "Calendar"
         ],
-        "description": "Get a specific date in the calendar",
+        "description": "Get information of a specific date in the calendar",
         "parameters": [
           {
             "name": "date",
@@ -400,9 +403,15 @@
                 "fullName": {
                   "example": "any"
                 },
-                "userType": {
+                "dni": {
                   "example": "any"
-                }
+                },
+                "role": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "email@email.com"
+              }
               }
             }
           }
@@ -457,6 +466,24 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fullName": {
+                  "example": "any"
+                },
+                "dni": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "email@email.com"
+                }
+              }
+            }
           }
         ],
         "responses": {

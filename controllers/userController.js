@@ -4,7 +4,7 @@ const User = db.users;
 // create a new user
 exports.create = async (req, res) => {
   try {
-    const { username, fullName, userType } = req.body;
+    const { username, fullName, role, dni, email } = req.body;
 
     if (!username || !fullName) {
       return res.status(400).json({ message: "username and fullName are required" });
@@ -13,7 +13,9 @@ exports.create = async (req, res) => {
     const newUser = await User.create({
       username,
       fullName,
-      userType: userType || "resident"
+      dni,
+      role: role || "resident",
+      email
     });
 
     return res.status(201).json(newUser);
@@ -50,6 +52,7 @@ exports.findOne = async (req, res) => {
 // update user info
 exports.update = async (req, res) => {
   try {
+    const { fullName, dni, email } = req.body;
     const updated = await User.findOneAndUpdate(
       { username: req.params.username },
       req.body,

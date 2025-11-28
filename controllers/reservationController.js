@@ -27,7 +27,8 @@ exports.create = async (req, res) => {
 // approve reservation (pending -> approved)
 exports.updateStatus = async (req, res) => {
   try {
-    const { reservationId, status } = req.body;
+    const reservationId = req.params.reservationId;
+    const { status } = req.body;
 
     if (!reservationId || !status) {
       return res.status(400).json({ message: "reservationId and status are required" });
@@ -82,9 +83,9 @@ exports.findByUser = async (req, res) => {
 };
 
 // delete reservation
-exports.deleteByUser = async (req, res) => {
+exports.deleteByReservation = async (req, res) => {
   try {
-    const deleted = await Reservation.findByIdAndDelete(req.params.userId);
+    const deleted = await Reservation.findByIdAndDelete(req.params.reservationId);
 
     if (!deleted) {
       return res.status(404).json({ message: "Reservation not found" });

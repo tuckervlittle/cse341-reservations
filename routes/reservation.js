@@ -6,7 +6,7 @@ const controller = require('../controllers/reservationController');
 router.post('/:userId', controller.create);
 
 // approve reservation (pending -> approved)
-router.put('/', controller.updateStatus);
+router.put('/:reservationId', controller.updateStatus);
 
 // get all reservations
 router.get('/', controller.findAll);
@@ -18,6 +18,6 @@ router.get('/status', controller.status);
 router.get('/:userId', controller.findByUser);
 
 // delete reservation (admin can delete any, users delete their own)
-router.delete('/:userId', controller.deleteByUser);
+router.delete('/:reservationId', controller.deleteByReservation);
 
 module.exports = router;
