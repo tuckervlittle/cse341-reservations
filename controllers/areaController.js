@@ -1,4 +1,5 @@
-const Area = require('../models/area');
+const db = require('../models/index.js');
+const Area = db.areas;
 
 // get all areas (club house, grill zone, sport court)
 exports.findAll = async (req, res) => {
