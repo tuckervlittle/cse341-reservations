@@ -10,7 +10,9 @@ routes.use('/user', require('./user'));
 routes.use('/', require('./swagger'));
 
 // Home Route 
-routes.get('/', (req, res) => {
+routes.get('/',
+  // #swagger.ignore = true
+  (req, res) => {
   res.status(200).send(`
     <h1 style="font-family: Arial; color: #333;">
       Welcome to the Community Booking System API

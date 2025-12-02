@@ -5,10 +5,10 @@
     "description": "API documentation for the Community Booking System",
     "version": "1.0.0"
   },
-  "host": "cse341-reservations.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/reservation/{userId}": {
@@ -79,33 +79,10 @@
       }
     },
     "/reservation/{reservationId}": {
-      "delete": {
+      "put": {
         "tags": [
           "Reservations"
         ],
-        "description": "Delete a reservation by ID",
-        "parameters": [
-          {
-            "name": "reservationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put":{
-        "tags" : ["Reservations"],
         "description": "Update reservation status",
         "parameters": [
           {
@@ -141,11 +118,35 @@
             "description": "Internal Server Error"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Delete a reservation by ID",
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/reservation/": {
       "get": {
-        
         "tags": [
           "Reservations"
         ],
@@ -402,15 +403,15 @@
                 "fullName": {
                   "example": "any"
                 },
-                "dni": {
-                  "example": "any"
-                },
                 "role": {
                   "example": "any"
                 },
+                "dni": {
+                  "example": "any"
+                },
                 "email": {
-                  "example": "email@email.com"
-              }
+                  "example": "any"
+                }
               }
             }
           }
@@ -479,7 +480,7 @@
                   "example": "any"
                 },
                 "email": {
-                  "example": "email@email.com"
+                  "example": "any"
                 }
               }
             }
