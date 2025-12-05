@@ -34,6 +34,16 @@ exports.logout = (req, res) => {
   res.status(200).json({ message: "Logout placeholder" });
 };
 
+// get all users
+exports.findAll = async (req, res) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.status(500).json({ message: "Server error getting users", error: err.message });
+  }
+};
+
 // get user by username
 exports.findOne = async (req, res) => {
   try {

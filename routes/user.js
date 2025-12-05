@@ -13,6 +13,12 @@ router.get('/login',
     // #swagger.ignore = true
     controller.login);
 
+//get all users
+router.get('/',
+// #swagger.tags = ['Users']
+// #swagger.description = 'Get all users'
+    controller.findAll);
+
 // logout user
 router.get('/logout', 
     // #swagger.ignore = true

@@ -20,6 +20,12 @@ router.get('/:date',
 // #swagger.description = 'Get information of a specific date in the calendar'
     controller.findOne);
 
+// update calendar entry by date
+router.put('/:date', 
+// #swagger.tags = ['Calendar']
+// #swagger.description = 'Update a date in the calendar'
+    controller.update);
+
 //delete an calendar entry by date
 router.delete('/:date', 
 // #swagger.tags = ['Calendar']

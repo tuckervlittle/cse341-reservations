@@ -5,7 +5,7 @@ module.exports = (mongoose) => {
       {
         date: String,         
         areaId: String,
-        is_available: Boolean,
+        is_available: String,
         notes: String,
       },
       { timestamps: true }
