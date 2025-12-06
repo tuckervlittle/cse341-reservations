@@ -6,7 +6,7 @@ const doc = {
         title: 'Community Booking System API',
         description: 'API documentation for the Community Booking System'
     },
-    host: process.env.SWAGGER_HOST || 'cse341-reservations.onrender.com',
+    host: process.env.SWAGGER_HOST || 'cse341-reservations-4fim.onrender.com',
     schemes: [(process.env.SWAGGER_SCHEME || 'https')]
 };
 

@@ -20,6 +20,15 @@ router.get('/user/:username',
 router.put('/:_id',
     // #swagger.tags = ['Reservations']
     // #swagger.description = 'Update reservation status'
+    /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Status update for the reservation',
+        required: true,
+        schema: {
+            status: "approved",
+            admin_comment: "Approved by admin"
+        }
+    } */
     controller.updateStatus
 );
 

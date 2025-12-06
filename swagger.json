@@ -97,14 +97,18 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Status update for the reservation",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "status": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "approved"
                 },
                 "admin_comment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Approved by admin"
                 }
               }
             }
@@ -270,6 +274,29 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Fields to update",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Club House Updated"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Main club house"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 120
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -407,14 +434,22 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Fields to update in the calendar entry",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "is_available": {
-                  "example": "any"
+                "isAvailable": {
+                  "type": "boolean",
+                  "example": true
                 },
                 "notes": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Updated notes for this date"
+                },
+                "areaId": {
+                  "type": "string",
+                  "example": "69344b2bf3153d8d8c6079f6"
                 }
               }
             }
@@ -554,6 +589,29 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "User info to update",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dni": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "resident"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "user@example.com"
+                }
+              }
+            }
           }
         ],
         "responses": {
