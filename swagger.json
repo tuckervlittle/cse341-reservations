@@ -5,7 +5,7 @@
     "description": "API documentation for the Community Booking System",
     "version": "1.0.0"
   },
-  "host": "cse341-reservations.onrender.com",
+  "host": "cse341-reservations-4fim.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
