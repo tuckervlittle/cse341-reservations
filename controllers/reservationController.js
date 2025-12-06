@@ -137,7 +137,14 @@ exports.status = (req, res) => {
 // get reservations for a specific user
 exports.findByUser = async (req, res) => {
   try {
-    const list = await Reservation.find({ userId: req.params.userId });
+    const username = req.params.username;
+    const user = await db.users.findOne({ username: username });
+    
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    const list = await db.reservations.find({ userId: user._id });
 
     if (!list.length) {
       return res.status(404).json({ message: "No reservations for this user" });

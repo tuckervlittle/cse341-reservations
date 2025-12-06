@@ -5,7 +5,7 @@
     "description": "API documentation for the Community Booking System",
     "version": "1.0.0"
   },
-  "host": "cse341-reservations.onrender.com",
+  "host": "cse341-reservations-4fim.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -97,14 +97,18 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Status update for the reservation",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "status": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "approved"
                 },
                 "admin_comment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Approved by admin"
                 }
               }
             }
@@ -151,6 +155,19 @@
         }
       }
     },
+    "/reservation/status": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Get reservation status info",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/reservation/": {
       "get": {
         "tags": [
@@ -163,19 +180,6 @@
           },
           "500": {
             "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/reservation/status": {
-      "get": {
-        "tags": [
-          "Reservations"
-        ],
-        "description": "Get reservation status info",
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -274,17 +278,22 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Fields to update",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Club House Updated"
                 },
                 "description": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Main club house"
                 },
                 "price": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 120
                 }
               }
             }
@@ -425,14 +434,22 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Fields to update in the calendar entry",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "is_available": {
-                  "example": "any"
+                "isAvailable": {
+                  "type": "boolean",
+                  "example": true
                 },
                 "notes": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Updated notes for this date"
+                },
+                "areaId": {
+                  "type": "string",
+                  "example": "69344b2bf3153d8d8c6079f6"
                 }
               }
             }
@@ -576,17 +593,22 @@
           {
             "name": "body",
             "in": "body",
+            "description": "User info to update",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "fullName": {
-                  "example": "any"
-                },
                 "dni": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "resident"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "user@example.com"
                 }
               }
             }
@@ -595,6 +617,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"

@@ -3,7 +3,7 @@ module.exports = (mongoose) => {
     "reservations",
     mongoose.Schema(
       {
-        userId: String,         // username owner
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: "users", required: true },
         areaId: { type: mongoose.Schema.Types.ObjectId, ref: "areas" },         
         date: { type: Date, required: true },           
         start_time: String,     
