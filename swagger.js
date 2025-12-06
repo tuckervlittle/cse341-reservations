@@ -13,7 +13,7 @@ const doc = {
 const outputfile = './swagger.json';
 const endpointsfiles = ['./routes/index.js'];
 
-swaggerAutogen(outputFile, endpointsFiles, doc);
+swaggerAutogen(outputfile, endpointsfiles, doc);
 
 /* When I use Loclahost*/
 
