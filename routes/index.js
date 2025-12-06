@@ -5,6 +5,10 @@ const calendar = require('./calendar');
 const user = require('./user');
 const swagger = require('./swagger');
 
+//test
+routes.post('/test-post', (req, res) => {
+    res.status(200).json({ message: 'Router successfully loaded! POST works!' });
+});
 // main modules
 routes.use('/reservation', reservation);
 routes.use('/area', area);
