@@ -3,6 +3,7 @@ const area = require('./area');
 const reservation = require('./reservation');
 const calendar = require('./calendar');
 const user = require('./user');
+const swagger = require('./swagger');
 
 // main modules
 routes.use('/reservation', reservation);
@@ -48,7 +49,7 @@ routes.get('/',
 });
 
 // swagger route
-routes.use('/', require('./swagger'));
+routes.use('/api-docs', swagger);
 
 module.exports = routes;
 
