@@ -13,14 +13,6 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// I put this just to test, since we are not connected to any database for now:
-// exports.findAll = async (req, res) => {
-//   return res.status(200).json([
-//     { date: "2025-01-01", areaId: "1", is_available: true, notes: "" }
-//   ]);
-// };
-
-
 // create a calendar entry
 exports.create = async (req, res) => {
   try {
