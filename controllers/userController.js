@@ -5,9 +5,26 @@ const User = db.users;
 exports.create = async (req, res) => {
   try {
     const { username, fullName, role, dni, email } = req.body;
+    // Required fields
+    if (!username || !fullName || !dni || !email) {
+      return res.status(400).json({
+        message: "username, fullName, dni and email are required"
+      });
+    }
 
-    if (!username || !fullName) {
-      return res.status(400).json({ message: "username and fullName are required" });
+    // dni must be numbers only
+    if (!/^[0-9]+$/.test(dni)) {
+      return res.status(400).json({
+        message: "dni must contain only numbers"
+      });
+    }
+
+    // valid roles
+    const allowedRoles = ["resident", "admin"];
+    if (role && !allowedRoles.includes(role)) {
+      return res.status(400).json({
+        message: `Invalid role. Allowed roles: ${allowedRoles.join(", ")}`
+      });
     }
 
     const newUser = await User.create({
@@ -19,17 +36,38 @@ exports.create = async (req, res) => {
     });
 
     return res.status(201).json(newUser);
+
   } catch (err) {
-    return res.status(500).json({ message: "Server error creating user", error: err.message });
+
+    // Detect duplicate values (username OR dni)
+    if (err.code === 11000) {
+      const field = Object.keys(err.keyValue)[0]; // "username" o "dni"
+      return res.status(400).json({
+        message: `The ${field} already exists. Please choose another one.`,
+        field: field,
+        value: err.keyValue[field]
+      });
+    }
+
+    return res.status(500).json({
+      message: "Server error creating user",
+      error: err.message
+    });
   }
 };
 
 // login (no real auth yet)
+/*
+#swagger.ignore = true
+*/
 exports.login = (req, res) => {
   res.status(200).json({ message: "Login placeholder (no real logic yet)" });
 };
 
 // logout (placeholder)
+/*
+#swagger.ignore = true
+*/
 exports.logout = (req, res) => {
   res.status(200).json({ message: "Logout placeholder" });
 };
@@ -44,15 +82,18 @@ exports.findOne = async (req, res) => {
     }
 
     return res.status(200).json(user);
+
   } catch (err) {
-    return res.status(500).json({ message: "Server error finding user", error: err.message });
+    return res.status(500).json({
+      message: "Server error finding user",
+      error: err.message
+    });
   }
 };
 
 // update user info
 exports.update = async (req, res) => {
   try {
-    const { fullName, dni, email } = req.body;
     const updated = await User.findOneAndUpdate(
       { username: req.params.username },
       req.body,
@@ -64,8 +105,24 @@ exports.update = async (req, res) => {
     }
 
     return res.status(200).json(updated);
+
   } catch (err) {
-    return res.status(500).json({ message: "Server error updating user", error: err.message });
+
+    // Duplicate check also applies when updating
+    if (err.code === 11000) {
+      const field = Object.keys(err.keyValue)[0];
+
+      return res.status(400).json({
+        message: `Cannot update. The ${field} already exists.`,
+        field: field,
+        value: err.keyValue[field]
+      });
+    }
+
+    return res.status(500).json({
+      message: "Server error updating user",
+      error: err.message
+    });
   }
 };
 
@@ -79,7 +136,12 @@ exports.delete = async (req, res) => {
     }
 
     return res.status(200).json({ message: "User removed" });
+
   } catch (err) {
-    return res.status(500).json({ message: "Server error deleting user", error: err.message });
+    return res.status(500).json({
+      message: "Server error deleting user",
+      error: err.message
+    });
   }
 };
+

@@ -1,9 +1,8 @@
 const db = require('../models/index.js');
 const Calendar = db.calendar;
 
-// findAll will work once the database is connected:
-
 // get full calendar
+
 exports.findAll = async (req, res) => {
   try {
     const entries = await Calendar.find();
@@ -14,12 +13,25 @@ exports.findAll = async (req, res) => {
 };
 
 // create a calendar entry
+
 exports.create = async (req, res) => {
   try {
     const { date, areaId, isAvailable } = req.body;
 
     if (!date || !areaId) {
       return res.status(400).json({ message: "date and areaId are required" });
+    }
+
+    if (isAvailable === true) {
+      const existingReservation = await db.reservations.findOne({
+        areaId: areaId,
+        date: date
+      });
+      if (existingReservation) {
+        return res.status(400).json({
+          message: "Area already reserved on this date. Calendar cannot mark it as available."
+        });
+      }
     }
 
     const newEntry = await Calendar.create({
@@ -35,6 +47,7 @@ exports.create = async (req, res) => {
 };
 
 // get calendar info by date
+
 exports.findOne = async (req, res) => {
   try {
     const entry = await Calendar.findOne({ date: req.params.date });
@@ -50,6 +63,7 @@ exports.findOne = async (req, res) => {
 };
 
 // delete entry by date
+
 exports.delete = async (req, res) => {
   try {
     const deleted = await Calendar.findOneAndDelete({ date: req.params.date });
