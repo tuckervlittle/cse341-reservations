@@ -20,11 +20,11 @@ router.get('/:areaId',
 // #swagger.description = 'Get an area by ID'
     controller.findOne);
 
-// PUT update area
-router.put('/:areaId',
+// update area
+router.put('/:areaId', 
 // #swagger.tags = ['Areas']
-// #swagger.description = 'Update an area'
-controller.update);
+// #swagger.description = 'Update an area by ID'
+    controller.update);
 
 // delete area
 router.delete('/:areaId', 
