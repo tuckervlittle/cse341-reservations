@@ -9,6 +9,13 @@ router.post('/user/:username',
     controller.create
 );
 
+// get reservations for a specific user
+router.get('/user/:username',
+    // #swagger.tags = ['Reservations']
+    // #swagger.description = 'Get reservations of a specific user'
+    controller.findByUser
+);
+
 // approve reservation (pending -> approved)
 router.put('/:_id',
     // #swagger.tags = ['Reservations']
@@ -16,11 +23,11 @@ router.put('/:_id',
     controller.updateStatus
 );
 
-// get all reservations
-router.get('/',
+// delete reservation
+router.delete('/:_id',
     // #swagger.tags = ['Reservations']
-    // #swagger.description = 'Get all reservations'
-    controller.findAll
+    // #swagger.description = 'Delete a reservation by ID'
+    controller.deleteByReservation
 );
 
 // get reservation status info
@@ -30,18 +37,11 @@ router.get('/status',
     controller.status
 );
 
-// get reservations for a specific user
-router.get('/user/:username',
+// get all reservations
+router.get('/',
     // #swagger.tags = ['Reservations']
-    // #swagger.description = 'Get reservations of a specific user'
-    controller.findByUser
-);
-
-// delete reservation
-router.delete('/:_id',
-    // #swagger.tags = ['Reservations']
-    // #swagger.description = 'Delete a reservation by ID'
-    controller.deleteByReservation
+    // #swagger.description = 'Get all reservations'
+    controller.findAll
 );
 
 module.exports = router;
