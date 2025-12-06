@@ -83,6 +83,25 @@ exports.update = async (req, res) => {
 
 // DELETE area by ID
 
+// update area
+exports.update = async (req, res) => {
+  try {
+    const { name, description, price } = req.body;
+    const updatedArea = await Area.findByIdAndUpdate(
+      req.params.areaId,
+      { name, description, price },
+      { new: true }
+    );
+    if (!updatedArea) {
+      return res.status(404).json({ message: "Area not found" });
+    }
+    return res.status(200).json(updatedArea);
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error updating area', error: err.message });
+  }
+};
+
+// delete area
 exports.delete = async (req, res) => {
   try {
     const deleted = await Area.findByIdAndDelete(req.params.areaId);
