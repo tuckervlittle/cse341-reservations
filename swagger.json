@@ -5,13 +5,13 @@
     "description": "API documentation for the Community Booking System",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-reservations.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
-    "/reservation/{userId}": {
+    "/reservation/user/{username}": {
       "post": {
         "tags": [
           "Reservations"
@@ -19,7 +19,7 @@
         "description": "Create a reservation for a specific user",
         "parameters": [
           {
-            "name": "userId",
+            "name": "username",
             "in": "path",
             "required": true,
             "type": "string"
@@ -30,7 +30,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "areaId": {
+                "areaName": {
                   "example": "any"
                 },
                 "date": {
@@ -47,6 +47,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -59,7 +62,7 @@
         "description": "Get reservations of a specific user",
         "parameters": [
           {
-            "name": "userId",
+            "name": "username",
             "in": "path",
             "required": true,
             "type": "string"
@@ -78,7 +81,7 @@
         }
       }
     },
-    "/reservation/{reservationId}": {
+    "/reservation/{_id}": {
       "put": {
         "tags": [
           "Reservations"
@@ -86,7 +89,7 @@
         "description": "Update reservation status",
         "parameters": [
           {
-            "name": "reservationId",
+            "name": "_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -98,6 +101,9 @@
               "type": "object",
               "properties": {
                 "status": {
+                  "example": "any"
+                },
+                "admin_comment": {
                   "example": "any"
                 }
               }
@@ -126,7 +132,7 @@
         "description": "Delete a reservation by ID",
         "parameters": [
           {
-            "name": "reservationId",
+            "name": "_id",
             "in": "path",
             "required": true,
             "type": "string"

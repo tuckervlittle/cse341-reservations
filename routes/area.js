@@ -33,3 +33,4 @@ router.delete('/:areaId',
     controller.delete);
 
 module.exports = router;
+

@@ -4,11 +4,15 @@ module.exports = (mongoose) => {
     mongoose.Schema(
       {
         userId: String,         // username owner
-        areaId: String,         
-        date: String,           
+        areaId: { type: mongoose.Schema.Types.ObjectId, ref: "areas" },         
+        date: { type: Date, required: true },           
         start_time: String,     
         end_time: String,       
-        status: String,         // pending, approved, rejected, cancelled
+        status: { 
+          type: String, 
+          enum: ["pending", "approved", "rejected", "canceled"],
+          default: "pending"
+        },
         admin_comment: String,  
       },
       { timestamps: true }

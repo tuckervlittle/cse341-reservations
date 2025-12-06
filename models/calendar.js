@@ -3,9 +3,9 @@ module.exports = (mongoose) => {
     "calendars",
     mongoose.Schema(
       {
-        date: String,         
-        areaId: String,
-        is_available: String,
+        date: { type: Date, required: true },         
+        areaId: { type: mongoose.Schema.Types.ObjectId, ref: "areas" },
+        isAvailable: { type: Boolean, default: true },
         notes: String,
       },
       { timestamps: true }
