@@ -16,7 +16,7 @@ exports.findAll = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { date, areaId, is_available, notes } = req.body;
+    const { date, areaId, isAvailable, notes } = req.body;
 
     if (!date || !areaId) {
       return res.status(400).json({ message: "date and areaId are required" });
@@ -37,7 +37,7 @@ exports.create = async (req, res) => {
     const newEntry = await Calendar.create({
       date,
       areaId,
-      is_available,
+      isAvailable,
       notes
     });
 
@@ -66,11 +66,11 @@ exports.findOne = async (req, res) => {
 // update calendar entry by ID
 exports.update = async (req, res) => {
   try {
-    const { is_available, notes, areaId } = req.body;
+    const { isAvailable, notes, areaId } = req.body;
 
     const updatedEntry = await Calendar.findByIdAndUpdate(
       req.params.id,
-      { isAvailable: is_available, notes, areaId },
+      { isAvailable, notes, areaId },
       { new: true }
     );
 
