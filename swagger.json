@@ -5,10 +5,10 @@
     "description": "API documentation for the Community Booking System",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "cse341-reservations-4fim.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/auth/google": {
