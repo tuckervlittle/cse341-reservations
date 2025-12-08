@@ -34,6 +34,16 @@ router.get('/:username',
 router.put('/:username', 
 // #swagger.tags = ['Users']
 // #swagger.description = 'Update a user by username'
+/* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'User info to update',
+        required: true,
+        schema: {
+            dni: "12345678",
+            role: "resident",
+            email: "user@example.com"
+        }
+    } */
     controller.update);
 
 // delete user
@@ -43,3 +53,4 @@ router.delete('/:username',
     controller.delete);
 
 module.exports = router;
+

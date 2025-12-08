@@ -23,7 +23,17 @@ router.get('/:date',
 // update calendar entry by date
 router.put('/:date', 
 // #swagger.tags = ['Calendar']
-// #swagger.description = 'Update a date in the calendar'
+  // #swagger.description = 'Update a date in the calendar'
+  /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Fields to update in the calendar entry',
+        required: true,
+        schema: {
+          isAvailable: true,
+          notes: "Updated notes for this date",
+          areaId: "69344b2bf3153d8d8c6079f6"
+        }
+  } */
     controller.update);
 
 //delete an calendar entry by date
@@ -33,3 +43,4 @@ router.delete('/:date',
     controller.delete);
 
 module.exports = router;
+

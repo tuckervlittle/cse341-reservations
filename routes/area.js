@@ -24,6 +24,16 @@ router.get('/:areaId',
 router.put('/:areaId', 
 // #swagger.tags = ['Areas']
 // #swagger.description = 'Update an area by ID'
+/* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Fields to update',
+        required: true,
+        schema: {
+          name: "Club House Updated",
+          description: "Main club house",
+          price: 120
+        }
+  } */
     controller.update);
 
 // delete area
@@ -33,3 +43,4 @@ router.delete('/:areaId',
     controller.delete);
 
 module.exports = router;
+
