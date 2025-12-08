@@ -29,15 +29,13 @@ db.mongoose
 // Sessions
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'abc123',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI, 
-      collectionName: 'sessions',
-    }),
+    store: new MongoStore({ mongoUrl: process.env.MONGODB_URI })
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
