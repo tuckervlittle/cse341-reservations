@@ -503,15 +503,17 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/calendar/{id}": {
       "put": {
         "tags": [
           "Calendar"
         ],
-        "description": "Update a date in the calendar",
+        "description": "Update a calendar entry by ID",
         "parameters": [
           {
-            "name": "date",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -562,10 +564,10 @@
         "tags": [
           "Calendar"
         ],
-        "description": "Delete a date in the calendar",
+        "description": "Delete a calendar entry by ID",
         "parameters": [
           {
-            "name": "date",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"

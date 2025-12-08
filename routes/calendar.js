@@ -42,12 +42,12 @@ router.post('/',
 } */
     controller.create);
 
-// update calendar entry by date
-router.put('/:date',
+// update calendar entry by ID
+router.put('/:id',
     isAuthenticated,
     isAdmin, 
 // #swagger.tags = ['Calendar']
-// #swagger.description = 'Update a date in the calendar'
+// #swagger.description = 'Update a calendar entry by ID'
   /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Fields to update in the calendar entry',
@@ -60,12 +60,12 @@ router.put('/:date',
   } */
     controller.update);
 
-//delete an calendar entry by date
-router.delete('/:date',
+// delete a calendar entry by ID
+router.delete('/:id',
     isAuthenticated,
     isAdmin, 
 // #swagger.tags = ['Calendar']
-// #swagger.description = 'Delete a date in the calendar'
+// #swagger.description = 'Delete a calendar entry by ID'
     controller.delete);
 
 module.exports = router;
