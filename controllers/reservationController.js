@@ -172,7 +172,12 @@ exports.findByUser = async (req, res) => {
 exports.deleteByReservation = async (req, res) => {
   try {
     const reservationId = req.params._id;
-    const userId = req.user._id; 
+
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+
+    const userId = req.user._id;
     const userRole = req.user.role;
 
     const reservation = await Reservation.findById(reservationId);

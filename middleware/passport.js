@@ -37,18 +37,14 @@ passport.use(
 );
 
 // Save user in session
-passport.serializeUser((user, done) => {
-  done(null, {
-    _id: user._id,
-    username: user.username,
-    role: user.role,
-    email: user.email,
-  });
-});
-
-// Retrieve user
-passport.deserializeUser((obj, done) => {
-  done(null, obj);
+passport.serializeUser((user, done) => done(null, user._id));
+passport.deserializeUser(async (_id, done) => {
+  try {
+    const user = await User.findById(_id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });
 
 module.exports = passport;

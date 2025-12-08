@@ -14,16 +14,15 @@ router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/api-docs'}),
     (req, res) => {
         // Save user in session
-        req.session.user = req.user;
         res.redirect('/');
     }
 );
 
 // Logout
 router.get('/logout', (req, res) => {
-    req.session.destroy(() => {
-        res.json({ message: 'Logged out' });
-    });
+  req.logout(() => {
+    res.json({ message: 'Logged out' });
+  });
 });
 
 module.exports = router;
