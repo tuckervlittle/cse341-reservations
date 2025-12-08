@@ -28,30 +28,29 @@ router.post('/',
 // #swagger.description = 'Create an area'
     controller.create);
 
-// update area
-router.put('/:areaId', 
+// update area by name
+router.put('/:name', 
     isAuthenticated,
     isAdmin,
-// #swagger.tags = ['Areas']
-// #swagger.description = 'Update an area by ID'
-/* #swagger.parameters['body'] = {
+    // #swagger.tags = ['Areas']
+    // #swagger.description = 'Update an area by name'
+    /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Fields to update',
         required: true,
         schema: {
-          name: "Club House Updated",
-          description: "Main club house",
+          description: "Club house",
           price: 120
         }
-  } */
-    controller.update);
+    } */
+    controller.update)
 
-// delete area
-router.delete('/:areaId', 
+// delete area by name
+router.delete('/:name', 
     isAuthenticated,
     isAdmin,
-// #swagger.tags = ['Areas']
-// #swagger.description = 'Delete an area by ID'
+    // #swagger.tags = ['Areas']
+    // #swagger.description = 'Delete an area by name'
     controller.delete);
 
 module.exports = router;

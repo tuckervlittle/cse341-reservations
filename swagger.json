@@ -319,15 +319,17 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/area/{name}": {
       "put": {
         "tags": [
           "Areas"
         ],
-        "description": "Update an area by ID",
+        "description": "Update an area by name",
         "parameters": [
           {
-            "name": "areaId",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -340,13 +342,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Club House Updated"
-                },
                 "description": {
                   "type": "string",
-                  "example": "Main club house"
+                  "example": "Club house"
                 },
                 "price": {
                   "type": "number",
@@ -378,10 +376,10 @@
         "tags": [
           "Areas"
         ],
-        "description": "Delete an area by ID",
+        "description": "Delete an area by name",
         "parameters": [
           {
-            "name": "areaId",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
