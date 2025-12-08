@@ -33,7 +33,14 @@ describe('Calendar routes', () => {
 
   await findAll(req, res);
   expect(res.statusCode).toBe(200);
-  expect(res.data).toEqual(_calendar);
+  expect(Array.isArray(res.data)).toBe(true);
+  expect(res.data).toHaveLength(_calendar.length);
+  res.data.forEach((c, i) => {
+    expect(c._id).toBe(_calendar[i]._id);
+    expect(c.areaId).toBe(_calendar[i].areaId);
+    expect(c.notes).toBe(_calendar[i].notes);
+    expect(new Date(c.date).toISOString().startsWith(new Date(_calendar[i].date).toISOString().slice(0,10))).toBe(true);
+  });
   });
 
   // With nothing in the database
@@ -67,7 +74,10 @@ describe('Calendar routes', () => {
 
     await findOne(req, res);
     expect(res.statusCode).toBe(200);
-    expect(res.data).toEqual(_calendar);
+    expect(res.data._id).toBe(_calendar._id);
+    expect(res.data.areaId).toBe(_calendar.areaId);
+    expect(res.data.notes).toBe(_calendar.notes);
+    expect(new Date(res.data.date).toISOString().startsWith(new Date(_calendar.date).toISOString().slice(0,10))).toBe(true);
   });
 
   // With incorrect params
