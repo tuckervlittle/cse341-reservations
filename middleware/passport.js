@@ -39,6 +39,7 @@ passport.use(
 // Save user in session
 passport.serializeUser((user, done) => {
   done(null, {
+    _id: user._id,
     username: user.username,
     role: user.role,
     email: user.email,
