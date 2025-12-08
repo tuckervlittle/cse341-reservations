@@ -13,8 +13,19 @@ module.exports = (mongoose) => {
           required: true,
           unique: true
         },
-        role: String, // admin, resident, security
-        email: String
+        role: {
+          type: String,
+          default: "resident"  // admin, resident, security
+        },
+        email: {
+          type: String,
+          required: true,
+          unique: true
+        },
+        password: {
+          type: String,
+          required: true
+        }
       },
       { timestamps: true }
     )

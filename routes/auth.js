@@ -1,0 +1,27 @@
+const express = require('express');
+const router = express.Router();
+const passport = require('../middleware/passport');
+
+// login with Google
+router.get('/google', 
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+// Callback 
+router.get('/google/callback',
+    passport.authenticate('google', { failureRedirect: '/api-docs', session: false }),
+    (req, res) => {
+        // Save user in session
+        req.session.user = req.user;
+        res.redirect('/');
+    }
+);
+
+// Logout
+router.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.json({ message: 'Logged out' });
+    });
+});
+
+module.exports = router;

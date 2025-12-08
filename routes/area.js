@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/areaController');
+const { isAuthenticated, isAdmin } = require('../middleware/authenticate');
+//
+//  AREAS: PUBLIC ACCESS (Resident + Admin)
 
 // get all areas (club house, grill zone, sport court)
 router.get('/',
@@ -8,20 +11,27 @@ router.get('/',
 // #swagger.description = 'Get all areas'
     controller.findAll);
 
-// create new area
-router.post('/', 
-// #swagger.tags = ['Areas']
-// #swagger.description = 'Create an area'
-    controller.create);
-
 // get area by ID
 router.get('/:areaId', 
 // #swagger.tags = ['Areas']
 // #swagger.description = 'Get an area by ID'
     controller.findOne);
 
+//   
+//  AREAS — ADMIN ONLY
+
+// create new area
+router.post('/', 
+    isAuthenticated, 
+    isAdmin,// must be admin
+// #swagger.tags = ['Areas']
+// #swagger.description = 'Create an area'
+    controller.create);
+
 // update area
 router.put('/:areaId', 
+    isAuthenticated,
+    isAdmin,
 // #swagger.tags = ['Areas']
 // #swagger.description = 'Update an area by ID'
 /* #swagger.parameters['body'] = {
@@ -38,6 +48,8 @@ router.put('/:areaId',
 
 // delete area
 router.delete('/:areaId', 
+    isAuthenticated,
+    isAdmin,
 // #swagger.tags = ['Areas']
 // #swagger.description = 'Delete an area by ID'
     controller.delete);
