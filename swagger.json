@@ -431,20 +431,26 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Calendar entry data",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "date": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2025-12-10T10:00:00.000Z"
                 },
                 "areaId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "69370726be054fd5397f873d"
                 },
-                "is_available": {
-                  "example": "any"
+                "isAvailable": {
+                  "type": "boolean",
+                  "example": true
                 },
                 "notes": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Reserved for community meeting"
                 }
               }
             }

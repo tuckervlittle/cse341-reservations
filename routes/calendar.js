@@ -29,6 +29,17 @@ router.post('/',
     isAdmin, 
 // #swagger.tags = ['Calendar']
 // #swagger.description = 'Create a date in a calendar'
+/* #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Calendar entry data',
+      required: true,
+      schema: {
+          date: "2025-12-10T10:00:00.000Z",
+          areaId: "69370726be054fd5397f873d",
+          isAvailable: true,
+          notes: "Reserved for community meeting"
+      }
+} */
     controller.create);
 
 // update calendar entry by date
@@ -36,7 +47,7 @@ router.put('/:date',
     isAuthenticated,
     isAdmin, 
 // #swagger.tags = ['Calendar']
-  // #swagger.description = 'Update a date in the calendar'
+// #swagger.description = 'Update a date in the calendar'
   /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Fields to update in the calendar entry',
