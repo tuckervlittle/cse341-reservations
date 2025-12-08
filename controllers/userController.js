@@ -31,7 +31,7 @@ exports.create = async (req, res) => {
       username,
       fullName,
       dni,
-      role: role || "resident",
+      role: "resident",
       email
     });
 

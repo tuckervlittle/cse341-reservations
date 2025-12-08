@@ -10,8 +10,10 @@ module.exports = (mongoose) => {
         },
         dni: {
           type: String,
-          required: true,
-          unique: true
+          required: false,
+          unique: true,
+          sparse: true
+
         },
         role: {
           type: String,
@@ -21,11 +23,11 @@ module.exports = (mongoose) => {
           type: String,
           required: true,
           unique: true
-        },
-        password: {
-          type: String,
-          required: true
         }
+        // password: {
+        //   type: String,
+        //   required: false
+        // }
       },
       { timestamps: true }
     )
