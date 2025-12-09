@@ -47,19 +47,6 @@ if (swaggerDocument) {
 // Routes
 app.use('/', require('./routes'));
 
-// Google Callback
-app.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/api-docs',
-    session: true,
-  }),
-  (req, res) => {
-    //req.session.user = req.user;
-    res.redirect('/');
-  }
-);
-
 // Export app for testing
 module.exports = app;
 
