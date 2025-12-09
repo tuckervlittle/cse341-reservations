@@ -11,7 +11,7 @@ router.get('/google',
 // Callback 
 router.get('/google/callback',
     // #swagger.ignore = true
-    passport.authenticate('google', { failureRedirect: '/api-docs'}),
+    passport.authenticate('google', { failureRedirect: '/api-docs', session: true}),
     (req, res) => {
         // Save user in session
         res.redirect('/');

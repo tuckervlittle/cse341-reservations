@@ -52,10 +52,10 @@ app.get(
   '/google/callback',
   passport.authenticate('google', {
     failureRedirect: '/api-docs',
-    session: false,
+    session: true,
   }),
   (req, res) => {
-    req.session.user = req.user;
+    //req.session.user = req.user;
     res.redirect('/');
   }
 );
