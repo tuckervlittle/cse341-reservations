@@ -1,35 +1,14 @@
 const routes = require('express').Router();
-const passport = require('../middleware/passport');
 
+const auth = require('./auth'); 
 const area = require('./area');
 const reservation = require('./reservation');
 const calendar = require('./calendar');
 const user = require('./user');
 const swagger = require('./swagger');
 
-// Google Oatuh routes
-routes.get(
-  '/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-);
-
-routes.get(
-  '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/api-docs',
-    session: true,
-  }),
-  (req, res) => {
-    req.session.user = req.user; 
-    res.redirect('/'); 
-  }
-);
-
-routes.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.json({ message: 'Logged out' });
-  });
-});
+// Authentication routes
+routes.use('/auth', auth);
 
 // Home Route
 routes.get('/',

@@ -15,17 +15,11 @@ passport.use(
         const email = profile.emails[0].value;
 
         // Find user in DB
-        let user = await User.findOne({ email });
+        const user = await User.findOne({ email });
 
         // If not exists, create resident by default
         if (!user) {
-          user = await User.create({
-            username: email.split("@")[0],
-            fullName: profile.displayName,
-            email: email,
-            dni: "",
-            role: "resident",   
-          });
+          return done(null, false, { message: "User not authorized. Ask admin to register your email." });
         }
 
         return done(null, user); // send DB user to session
