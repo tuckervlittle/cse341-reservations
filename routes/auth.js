@@ -11,7 +11,7 @@ router.get('/google',
 router.get('/google/callback', (req, res, next) => {
   passport.authenticate('google', (err, user, info) => {
     if (err) return next(err);
-    if (!user) return res.redirect('/not-authorized');
+    if (!user) return res.redirect('/auth/not-authorized');
     req.logIn(user, (err) => {
       if (err) return next(err);
       req.session.user = user;
@@ -23,8 +23,19 @@ router.get('/google/callback', (req, res, next) => {
 // Routes for unauthorized emails
 router.get('/not-authorized', (req, res) => {
   res.status(403).send(`
-    <h2>Access Denied</h2>
-    <p>You are not authorized. Contact admin to get access.</p>
+    <html>
+      <head>
+        <title>Access Denied</title>
+      </head>
+      <body style="font-family:sans-serif; text-align:center; margin-top:50px;">
+        <h2>Access Denied</h2>
+        <p>You are not authorized. Contact admin to get access.</p>
+        <button onclick="window.location.href='/'" 
+                style="padding:10px 20px; font-size:16px; cursor:pointer;">
+          Go Back
+        </button>
+      </body>
+    </html>
   `);
 });
 
