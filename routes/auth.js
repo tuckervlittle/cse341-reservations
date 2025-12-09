@@ -11,7 +11,7 @@ router.get('/google',
 router.get('/google/callback', (req, res, next) => {
   passport.authenticate('google', (err, user, info) => {
     if (err) return next(err);
-    if (!user) return res.redirect('/not-authorized'); // <--- fallo redirige aquí
+    if (!user) return res.redirect('/not-authorized');
     req.logIn(user, (err) => {
       if (err) return next(err);
       req.session.user = user;
