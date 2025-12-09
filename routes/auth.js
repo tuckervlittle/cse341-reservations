@@ -8,15 +8,17 @@ router.get('/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-// Callback
-router.get(
-  '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/not-authorized', session: true }),
-  (req, res) => {
-    req.session.user = req.user;
-    res.redirect('/');
-  }
-);
+router.get('/google/callback', (req, res, next) => {
+  passport.authenticate('google', (err, user, info) => {
+    if (err) return next(err);
+    if (!user) return res.redirect('/not-authorized'); // <--- fallo redirige aquí
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+      req.session.user = user;
+      return res.redirect('/');
+    });
+  })(req, res, next);
+});
 
 // Routes for unauthorized emails
 router.get('/not-authorized', (req, res) => {
