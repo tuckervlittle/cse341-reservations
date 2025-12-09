@@ -8,7 +8,7 @@ const user = require('./user');
 const swagger = require('./swagger');
 
 // Authentication routes
-routes.use('/auth', auth);
+routes.use('/', auth);
 
 // Home Route
 routes.get('/',
