@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('./middleware/passport'); // Google OAuth
-const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -27,14 +26,7 @@ db.mongoose
  });
 
 // Sessions
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: new MongoStore({ mongoUrl: process.env.MONGODB_URI })
-  })
-);
+app.use( session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, }) );
 
 app.use(passport.initialize());
 app.use(passport.session());
