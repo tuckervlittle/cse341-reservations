@@ -26,7 +26,7 @@ db.mongoose
  });
 
 // Sessions
-app.use( session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, }) );
+app.use( session({ secret: process.env.SESSION_SECRET || 'abc123', resave: false, saveUninitialized: false, }) );
 
 app.use(passport.initialize());
 app.use(passport.session());
