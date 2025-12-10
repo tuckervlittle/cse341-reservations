@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
       return res.status(400).json({ message: "date and areaId are required" });
     }
 
-    if (is_available === true) {
+    if (isAvailable === true) {
       const existingReservation = await db.reservations.findOne({
         areaId: areaId,
         date: date
