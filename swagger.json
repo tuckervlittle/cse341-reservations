@@ -11,6 +11,36 @@
     "https"
   ],
   "paths": {
+    "/auth/google": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/google/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/reservation/user/{username}": {
       "post": {
         "tags": [
@@ -47,6 +77,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -72,6 +105,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -82,6 +118,34 @@
       }
     },
     "/reservation/{_id}": {
+      "delete": {
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Delete a reservation by ID",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Reservations"
@@ -121,30 +185,11 @@
           "400": {
             "description": "Bad Request"
           },
-          "404": {
-            "description": "Not Found"
+          "401": {
+            "description": "Unauthorized"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Reservations"
-        ],
-        "description": "Delete a reservation by ID",
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -177,6 +222,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -231,6 +282,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -262,15 +319,17 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/area/{name}": {
       "put": {
         "tags": [
           "Areas"
         ],
-        "description": "Update an area by ID",
+        "description": "Update an area by name",
         "parameters": [
           {
-            "name": "areaId",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -283,13 +342,9 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Club House Updated"
-                },
                 "description": {
                   "type": "string",
-                  "example": "Main club house"
+                  "example": "Club house"
                 },
                 "price": {
                   "type": "number",
@@ -303,6 +358,12 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -315,10 +376,10 @@
         "tags": [
           "Areas"
         ],
-        "description": "Delete an area by ID",
+        "description": "Delete an area by name",
         "parameters": [
           {
-            "name": "areaId",
+            "name": "name",
             "in": "path",
             "required": true,
             "type": "string"
@@ -327,6 +388,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -347,6 +414,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -361,20 +431,26 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Calendar entry data",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "date": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2025-12-10T10:00:00.000Z"
                 },
                 "areaId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "69370726be054fd5397f873d"
                 },
-                "is_available": {
-                  "example": "any"
+                "isAvailable": {
+                  "type": "boolean",
+                  "example": true
                 },
                 "notes": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Reserved for community meeting"
                 }
               }
             }
@@ -386,6 +462,12 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -411,6 +493,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -418,15 +503,17 @@
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/calendar/{id}": {
       "put": {
         "tags": [
           "Calendar"
         ],
-        "description": "Update a date in the calendar",
+        "description": "Update a calendar entry by ID",
         "parameters": [
           {
-            "name": "date",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -459,6 +546,12 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -471,10 +564,10 @@
         "tags": [
           "Calendar"
         ],
-        "description": "Delete a date in the calendar",
+        "description": "Delete a calendar entry by ID",
         "parameters": [
           {
-            "name": "date",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -483,6 +576,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -532,6 +631,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -545,6 +650,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -569,6 +680,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"
@@ -621,6 +738,12 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -645,6 +768,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "404": {
             "description": "Not Found"

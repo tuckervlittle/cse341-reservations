@@ -16,7 +16,7 @@ exports.findAll = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { date, areaId, is_available, notes } = req.body;
+    const { date, areaId, isAvailable, notes } = req.body;
 
     if (!date || !areaId) {
       return res.status(400).json({ message: "date and areaId are required" });
@@ -37,7 +37,7 @@ exports.create = async (req, res) => {
     const newEntry = await Calendar.create({
       date,
       areaId,
-      is_available,
+      isAvailable,
       notes
     });
 
@@ -63,32 +63,34 @@ exports.findOne = async (req, res) => {
   }
 };
 
-// update calendar entry by date
+// update calendar entry by ID
 exports.update = async (req, res) => {
   try {
-    const { is_available, notes } = req.body;
-    const updatedEntry = await Calendar.findOneAndUpdate(
-      { date: req.params.date },
-      { is_available, notes },
+    const { isAvailable, notes, areaId } = req.body;
+
+    const updatedEntry = await Calendar.findByIdAndUpdate(
+      req.params.id,
+      { isAvailable, notes, areaId },
       { new: true }
     );
+
     if (!updatedEntry) {
-      return res.status(404).json({ message: "No calendar entry for this date" });
+      return res.status(404).json({ message: "Calendar entry not found" });
     }
+
     return res.status(200).json(updatedEntry);
   } catch (err) {
     return res.status(500).json({ message: "Server error updating calendar", error: err.message });
   }
 };
 
-// delete entry by date
-
+// delete calendar entry by ID
 exports.delete = async (req, res) => {
   try {
-    const deleted = await Calendar.findOneAndDelete({ date: req.params.date });
+    const deleted = await Calendar.findByIdAndDelete(req.params.id);
 
     if (!deleted) {
-      return res.status(404).json({ message: "Entry not found on this date" });
+      return res.status(404).json({ message: "Calendar entry not found" });
     }
 
     return res.status(200).json({ message: "Calendar entry deleted" });
@@ -96,3 +98,4 @@ exports.delete = async (req, res) => {
     return res.status(500).json({ message: "Server error deleting calendar", error: err.message });
   }
 };
+

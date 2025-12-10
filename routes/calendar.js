@@ -1,29 +1,53 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/calendarController');
+const { isAuthenticated, isAdmin } = require('../middleware/authenticate');
+
+//
+//// CALENDAR — PUBLIC (Resident + Admin)
 
 //get full calendar (booked dates, available dates)
 router.get('/',
+    isAuthenticated,
 // #swagger.tags = ['Calendar']
 // #swagger.description = 'Get all dates in the calendar'
     controller.findAll);
 
-// create a calendar entry
-router.post('/', 
-// #swagger.tags = ['Calendar']
-// #swagger.description = 'Create a date in a calendar'
-    controller.create);
-
 // get calendar info by date
-router.get('/:date', 
+router.get('/:date',
+    isAuthenticated, 
 // #swagger.tags = ['Calendar']
 // #swagger.description = 'Get information of a specific date in the calendar'
     controller.findOne);
 
-// update calendar entry by date
-router.put('/:date', 
+//
+// //CALENDAR — ADMIN ONLY
+
+// create a calendar entry
+router.post('/',
+    isAuthenticated,
+    isAdmin, 
 // #swagger.tags = ['Calendar']
-  // #swagger.description = 'Update a date in the calendar'
+// #swagger.description = 'Create a date in a calendar'
+/* #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Calendar entry data',
+      required: true,
+      schema: {
+          date: "2025-12-10T10:00:00.000Z",
+          areaId: "69370726be054fd5397f873d",
+          isAvailable: true,
+          notes: "Reserved for community meeting"
+      }
+} */
+    controller.create);
+
+// update calendar entry by ID
+router.put('/:id',
+    isAuthenticated,
+    isAdmin, 
+// #swagger.tags = ['Calendar']
+// #swagger.description = 'Update a calendar entry by ID'
   /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Fields to update in the calendar entry',
@@ -36,10 +60,12 @@ router.put('/:date',
   } */
     controller.update);
 
-//delete an calendar entry by date
-router.delete('/:date', 
+// delete a calendar entry by ID
+router.delete('/:id',
+    isAuthenticated,
+    isAdmin, 
 // #swagger.tags = ['Calendar']
-// #swagger.description = 'Delete a date in the calendar'
+// #swagger.description = 'Delete a calendar entry by ID'
     controller.delete);
 
 module.exports = router;

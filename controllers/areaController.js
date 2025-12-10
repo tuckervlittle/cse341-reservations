@@ -59,61 +59,43 @@ exports.findOne = async (req, res) => {
   }
 };
 
-// UPDATE area by ID
+// UPDATE area by name
 exports.update = async (req, res) => {
   try {
-    const updated = await Area.findByIdAndUpdate(
-      req.params.areaId,
-      req.body,
+    const { description, price } = req.body; 
+
+    const updatedArea = await Area.findOneAndUpdate(
+      { name: req.params.name }, 
+      { description, price },
       { new: true }
     );
 
-    if (!updated) {
-      return res.status(404).json({ message: 'Area not found' });
+    if (!updatedArea) {
+      return res.status(404).json({ message: "Area not found" });
     }
 
-    return res.status(200).json(updated);
+    return res.status(200).json(updatedArea);
   } catch (err) {
     return res.status(500).json({
-      message: 'Server error updating area',
+      message: "Server error updating area",
       error: err.message
     });
   }
 };
 
-// DELETE area by ID
-
-// update area
-exports.update = async (req, res) => {
-  try {
-    const { name, description, price } = req.body;
-    const updatedArea = await Area.findByIdAndUpdate(
-      req.params.areaId,
-      { name, description, price },
-      { new: true }
-    );
-    if (!updatedArea) {
-      return res.status(404).json({ message: "Area not found" });
-    }
-    return res.status(200).json(updatedArea);
-  } catch (err) {
-    return res.status(500).json({ message: 'Server error updating area', error: err.message });
-  }
-};
-
-// delete area
+// DELETE area by name
 exports.delete = async (req, res) => {
   try {
-    const deleted = await Area.findByIdAndDelete(req.params.areaId);
+    const deletedArea = await Area.findOneAndDelete({ name: req.params.name });
 
-    if (!deleted) {
-      return res.status(404).json({ message: 'Area not found' });
+    if (!deletedArea) {
+      return res.status(404).json({ message: "Area not found" });
     }
 
-    return res.status(200).json({ message: 'Area removed' });
+    return res.status(200).json({ message: "Area removed" });
   } catch (err) {
     return res.status(500).json({
-      message: 'Server error deleting area',
+      message: "Server error deleting area",
       error: err.message
     });
   }

@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/areaController');
+const { isAuthenticated, isAdmin } = require('../middleware/authenticate');
+//
+//  AREAS: PUBLIC ACCESS (Resident + Admin)
 
 // get all areas (club house, grill zone, sport court)
 router.get('/',
@@ -8,38 +11,46 @@ router.get('/',
 // #swagger.description = 'Get all areas'
     controller.findAll);
 
-// create new area
-router.post('/', 
-// #swagger.tags = ['Areas']
-// #swagger.description = 'Create an area'
-    controller.create);
-
 // get area by ID
 router.get('/:areaId', 
 // #swagger.tags = ['Areas']
 // #swagger.description = 'Get an area by ID'
     controller.findOne);
 
-// update area
-router.put('/:areaId', 
+//   
+//  AREAS — ADMIN ONLY
+
+// create new area
+router.post('/', 
+    isAuthenticated, 
+    isAdmin,// must be admin
 // #swagger.tags = ['Areas']
-// #swagger.description = 'Update an area by ID'
-/* #swagger.parameters['body'] = {
+// #swagger.description = 'Create an area'
+    controller.create);
+
+// update area by name
+router.put('/:name', 
+    isAuthenticated,
+    isAdmin,
+    // #swagger.tags = ['Areas']
+    // #swagger.description = 'Update an area by name'
+    /* #swagger.parameters['body'] = {
         in: 'body',
         description: 'Fields to update',
         required: true,
         schema: {
-          name: "Club House Updated",
-          description: "Main club house",
+          description: "Club house",
           price: 120
         }
-  } */
-    controller.update);
+    } */
+    controller.update)
 
-// delete area
-router.delete('/:areaId', 
-// #swagger.tags = ['Areas']
-// #swagger.description = 'Delete an area by ID'
+// delete area by name
+router.delete('/:name', 
+    isAuthenticated,
+    isAdmin,
+    // #swagger.tags = ['Areas']
+    // #swagger.description = 'Delete an area by name'
     controller.delete);
 
 module.exports = router;

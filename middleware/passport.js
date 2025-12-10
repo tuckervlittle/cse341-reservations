@@ -1,0 +1,45 @@
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const db = require('../models/index');
+const User = db.users;
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email = profile.emails[0].value;
+
+        // Find user in DB
+        const user = await User.findOne({ email });
+
+        // If not exists, create resident by default
+        if (!user) {
+          return done(null, false, { message: "User not authorized. Ask admin to register your email." });
+        }
+
+        return done(null, user); // send DB user to session
+      } catch (err) {
+        return done(err, null);
+      }
+    }
+  )
+);
+
+// Save user in session
+passport.serializeUser((user, done) => done(null, user._id));
+passport.deserializeUser(async (_id, done) => {
+  try {
+    const user = await User.findById(_id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
+
+module.exports = passport;
+

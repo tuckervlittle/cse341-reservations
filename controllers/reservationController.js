@@ -171,12 +171,25 @@ exports.findByUser = async (req, res) => {
 // delete reservation
 exports.deleteByReservation = async (req, res) => {
   try {
-    const deleted = await Reservation.findByIdAndDelete(req.params._id);
+    const reservationId = req.params._id;
 
-    if (!deleted) {
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+
+    const userId = req.user._id;
+    const userRole = req.user.role;
+
+    const reservation = await Reservation.findById(reservationId);
+    if (!reservation) {
       return res.status(404).json({ message: "Reservation not found" });
     }
 
+    if (userRole !== "admin" && reservation.userId.toString() !== userId.toString()) {
+      return res.status(403).json({ message: "You are not allowed to cancel this reservation" });
+    }
+
+    await Reservation.findByIdAndDelete(reservationId);
     return res.status(200).json({ message: "Reservation canceled" });
 
   } catch (err) {
