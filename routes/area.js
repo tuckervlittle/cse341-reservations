@@ -24,8 +24,11 @@ router.get('/:areaId',
 router.post('/', 
     isAuthenticated, 
     isAdmin,// must be admin
-// #swagger.tags = ['Areas']
-// #swagger.description = 'Create an area'
+    // #swagger.tags = ['Areas']
+    // #swagger.description = 'Create an area'
+    /* #swagger.responses[200] = {
+        schema: [{ $ref: '#/definitions/Area' }]
+    } */
     controller.create);
 
 // update area by name
@@ -34,16 +37,11 @@ router.put('/:name',
     isAdmin,
     // #swagger.tags = ['Areas']
     // #swagger.description = 'Update an area by name'
-    /* #swagger.parameters['body'] = {
-        in: 'body',
-        description: 'Fields to update',
-        required: true,
-        schema: {
-          description: "Club house",
-          price: 120
-        }
+    /* #swagger.responses[200] = {
+        description: 'List of areas',
+        schema: [{ $ref: '#/definitions/UpdatedArea' }]
     } */
-    controller.update)
+        controller.update)
 
 // delete area by name
 router.delete('/:name', 
