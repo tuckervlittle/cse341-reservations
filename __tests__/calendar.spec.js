@@ -14,14 +14,14 @@ describe('Calendar routes', () => {
     _id: '68db5477046c79066df0eef8',
     date: "12/25/2025",
     areaId: "68db5477046c79066df0eef8",
-    is_available: false,
+    isAvailable: false,
     notes: "Date not available"
     },
     {
     _id: '693309417f92ce21771bddb0',
     date: "12/31/2025",
     areaId: "692a479eeaf18049482f6c64",
-    is_available: true,
+    isAvailable: true,
     notes: "Date is available"
     },
   ];
@@ -61,7 +61,7 @@ describe('Calendar routes', () => {
       _id: '68db5477046c79066df0eef8',
       date: "12/25/2025",
       areaId: "692a479eeaf18049482f6c64",
-      is_available: false,
+      isAvailable: false,
       notes: "Date not available"
     };
 
@@ -86,7 +86,7 @@ describe('Calendar routes', () => {
       _id: '68db5477046c79066df0eef8',
       date: "12/25/2025",
       areaId: "692a479eeaf18049482f6c64",
-      is_available: false,
+      isAvailable: false,
       notes: "Date not available"
     };
 
@@ -107,7 +107,7 @@ describe('Calendar routes', () => {
       _id: '68db5477046c79066df0eef8',
       date: "12/25/2025",
       areaId: "692a479eeaf18049482f6c64",
-      is_available: false,
+      isAvailable: false,
       notes: "Date not available"
     };
 

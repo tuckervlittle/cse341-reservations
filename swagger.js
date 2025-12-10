@@ -43,14 +43,14 @@ const doc = {
             username: "Tucker",
             fullName: "Tucker Little",
             role: "resident",
-            dni: "any",
+            dni: "99999999",
             email: "tucker.little95@gmail.com"
         },
         UpdatedUser: {
             username: "Tucker",
             fullName: "Tucker Little",
             role: "admin",
-            dni: "any",
+            dni: "99999999",
             email: "tucker.little95@gmail.com"
         }
     }
