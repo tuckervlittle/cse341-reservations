@@ -11,6 +11,12 @@ router.post('/user/:username',
     isAuthenticated,
     // #swagger.tags = ['Reservations']
     // #swagger.description = 'Create a reservation for a specific user'
+    /* #swagger.parameters['Reservation'] = {
+      in: 'body',
+      description: 'Reservation to create',
+      required: true,
+      schema: { $ref: '#/definitions/Reservation' }
+  } */
     controller.create
 );
 
