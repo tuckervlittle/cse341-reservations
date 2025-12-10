@@ -20,7 +20,7 @@ const doc = {
             price: 200
         },
         Reservation: {
-            area: "Club House",
+            areaName: "Club House",
             date: "12/27/25"
         },
         UpdatedReservation: {
