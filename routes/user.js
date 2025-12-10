@@ -12,6 +12,12 @@ router.post('/',
     isAdmin,
 // #swagger.tags = ['Users']
 // #swagger.description = 'Create a user'
+    /* #swagger.parameters['User'] = {
+      in: 'body',
+      description: 'User to create',
+      required: true,
+      schema: { $ref: '#/definitions/User' }
+  } */
     controller.create);
 
 //get all users
@@ -46,16 +52,12 @@ router.put('/:username',
     isAdmin,
 // #swagger.tags = ['Users']
 // #swagger.description = 'Update a user by username'
-/* #swagger.parameters['body'] = {
-        in: 'body',
-        description: 'User info to update',
-        required: true,
-        schema: {
-            dni: "12345678",
-            role: "resident",
-            email: "user@example.com"
-        }
-    } */
+    /* #swagger.parameters['User'] = {
+      in: 'body',
+      description: 'User to update',
+      required: true,
+      schema: { $ref: '#/definitions/UpdatedUser' }
+  } */
     controller.update);
 
 // delete a user (ADMIN ONLY)

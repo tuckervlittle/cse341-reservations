@@ -28,12 +28,12 @@ router.post('/',
     // #swagger.description = 'Create an area'
     /* #swagger.parameters['Area'] = {
       in: 'body',
-      description: 'Area to create',
+      description: 'Area to update',
       required: true,
-      schema: { $ref: '#/definitions/Area' }
+      schema: { $ref: '#/definitions/UpdatedArea' }
   } */
     /* #swagger.responses[200] = {
-        schema: [{ $ref: '#/definitions/Area' }]
+        schema: [{ $ref: '#/definitions/UpdatedArea' }]
     } */
     controller.create);
 

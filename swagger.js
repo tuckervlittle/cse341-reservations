@@ -24,8 +24,8 @@ const doc = {
             date: "12/27/25"
         },
         UpdatedReservation: {
-            area: "Club House",
-            date: "12/28/25"
+            status: "approved",
+            admin_comment: "Approved by admin"
         },
         Calendar: {
             date: "12/30/25",
@@ -39,7 +39,20 @@ const doc = {
             isAvailable: true,
             notes: ""
         },
-        
+        User: {
+            username: "Tucker",
+            fullName: "Tucker Little",
+            role: "resident",
+            dni: "any",
+            email: "tucker.little95@gmail.com"
+        },
+        UpdatedUser: {
+            username: "Tucker",
+            fullName: "Tucker Little",
+            role: "admin",
+            dni: "any",
+            email: "tucker.little95@gmail.com"
+        }
     }
 };
 
