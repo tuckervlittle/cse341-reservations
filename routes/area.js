@@ -26,6 +26,12 @@ router.post('/',
     isAdmin,// must be admin
     // #swagger.tags = ['Areas']
     // #swagger.description = 'Create an area'
+    /* #swagger.parameters['Area'] = {
+      in: 'body',
+      description: 'Area to create',
+      required: true,
+      schema: { $ref: '#/definitions/Area' }
+  } */
     /* #swagger.responses[200] = {
         schema: [{ $ref: '#/definitions/Area' }]
     } */
@@ -37,6 +43,12 @@ router.put('/:name',
     isAdmin,
     // #swagger.tags = ['Areas']
     // #swagger.description = 'Update an area by name'
+    /* #swagger.parameters['UpdatedArea'] = {
+      in: 'body',
+      description: 'Area to create',
+      required: true,
+      schema: { $ref: '#/definitions/UpdatedArea' }
+  } */
     /* #swagger.responses[200] = {
         description: 'List of areas',
         schema: [{ $ref: '#/definitions/UpdatedArea' }]
